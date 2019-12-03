@@ -1,0 +1,17 @@
+<apex:page controller="AssignmentSubmissionController">
+   <apex:form >
+    <apex:pageBlock title="Submissions for {!assn.Name}">
+        <apex:outputText value="No Submissions yet!" rendered="{!submissionList.size==0}"/>
+        <apex:dataTable width="100%" value="{!docsList}" var="sub" id="table1" rendered="{! (docsList.size != NULL) }" cellPadding="4" border="1"> 
+            <apex:column >
+                <apex:facet name="header" > Name</apex:facet>
+                <apex:commandLink target="_blank" value="{!sub.Name}" action="{!viewSubmission}" >
+                    <apex:param name="docId" value="{!sub.ParentId}" assignTo="{!docId}"/>
+                </apex:commandLink>
+               
+            </apex:column>
+           
+        </apex:dataTable>    
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

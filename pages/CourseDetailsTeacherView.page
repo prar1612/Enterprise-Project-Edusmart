@@ -1,0 +1,88 @@
+<apex:page docType="html-5.0" controller="CourseDetailsTeacherViewController">
+<style type="text/css">
+.customPopup {
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    left: 20%;
+    padding: 10px;
+    position: absolute;
+    z-index: 9999;
+    top:-10%;
+    width: 650px;
+ 
+}
+
+.disabledTextBox {
+    background-color: white;
+    border: 1px solid;
+    color: black;
+    cursor: default;
+    width: 90px;
+    display: table;
+    padding: 2px 1px;
+    text-align:right;
+}   
+
+.closeButton {
+    float: right;
+}
+</style>
+    <apex:form >
+        <apex:pageBlock title="{!crs.Name} - {!crs.Course_Name__c}">
+        <apex:pageBlockSection >
+        <apex:outputPanel id="empty">
+            <apex:commandButton value="Create Assignment" action="{!createAssignment}" rerender="popup">
+                    <apex:param name="assmntId" value="" assignTo="{!assmntId}"/></apex:commandButton> <br/><br/>
+            <apex:outputText rendered="{!assgnmtList.size==0}">No assignments created for this course.</apex:outputText>
+        </apex:outputPanel>
+        </apex:pageBlockSection>
+            <apex:outputPanel id="popup">
+                <apex:outputPanel id="popInnerOutputPnl" styleClass="customPopup"  rendered="{!showpopup}">
+                    <apex:commandButton value="X" title="Close the popup" action="{!closePopup}" styleClass="closeButton" rerender="popup">
+                    </apex:commandButton>
+                    <apex:pageBlock title="New Assignment">
+                        <apex:pageBlockButtons >
+                            <apex:commandButton value="Save" action="{!saveAssignment}" rerender="table,popup,empty,cList"   />
+                        </apex:pageBlockButtons>
+                        Assignment Name:<apex:inputField label="Assignment Name" value="{!newAssignment.Name}"/><br/><br/><br/>
+                        Questions:<apex:inputTextarea label="Questions" value="{!newAssignment.Questions__c}" rows="15" cols="80"/><br/><br/><br/>
+                        Due Date: <apex:input type="date" value="{!dat}"/><br/><br/><br/>
+                        Total Points:<apex:inputField value="{!newAssignment.Total_Points__c}"/>
+                    </apex:pageBlock>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <apex:outputPanel id="cList">
+                    <apex:dataTable width="100%" value="{!assgnmtList}" var="assn" id="table1" rendered="{! (assgnmtList.size > 0) }" cellPadding="4" border="1"> 
+                       <apex:column >
+                            <apex:facet name="header" > Edit</apex:facet>
+                            <apex:commandLink value="Edit" action="{!createAssignment}" reRender="popup" >
+                                <apex:param name="assmntId" value="{!assn.Id}" assignTo="{!assmntId}"/>
+                            </apex:commandLink>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header" > View Submissions</apex:facet>
+                            <apex:commandLink value="View Submission" action="{!viewSubmissions}" reRender="popup" >
+                                <apex:param name="assmntId" value="{!assn.Id}" assignTo="{!assmntId}"/>
+                            </apex:commandLink>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Assignment Name:</apex:facet>
+                              {!assn.Name}
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Due Date</apex:facet>
+                            {!assn.Due_Date__c}
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Total Points</apex:facet>
+                            {!assn.Total_Points__c}
+                        </apex:column>
+                    </apex:dataTable>
+
+            
+            
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

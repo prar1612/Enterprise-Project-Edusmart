@@ -1,0 +1,109 @@
+<apex:page controller="StudentSearchController">
+                  <style type="text/css">
+.customPopup {
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    left: 20%;
+    padding: 10px;
+    position: absolute;
+    z-index: 9999;
+    /* These are the 3 css properties you will need to tweak so the pop 
+                            up displays in the center of the screen. First set the width. Then set 
+                            margin-left to negative half of what the width is. You can also add 
+                            the height property for a fixed size pop up.*/
+    width: 500px;
+    top: 20%;
+}
+
+.disabledTextBox {
+    background-color: white;
+    border: 1px solid;
+    color: black;
+    cursor: default;
+    width: 90px;
+    display: table;
+    padding: 2px 1px;
+    text-align:right;
+}   
+
+.closeButton {
+    float: right;
+}
+</style>
+    <apex:form >
+        <apex:pageBlock id="details" title="Student Search">
+            <apex:pageBlockSection title="Search" columns="2">
+            <table>
+          
+            <apex:repeat value="{!wrprList}" var="wr" >
+                <tr>            
+                <td><apex:selectList label="Search By Name" value="{!wr.searchBy}" size="1">
+                       <apex:selectOptions value="{!wr.searchByOptions}"></apex:selectOptions>
+                    </apex:selectList>
+                <apex:inputText label="Search Value" value="{!wr.searchText}"/> </td></tr>
+              </apex:repeat>
+              <tr><apex:inputText label="Semester" value="{!semester}"/></tr>
+              <tr><apex:inputField value="{!cr.Major__c}"/></tr>
+              </table> 
+            
+                 
+            </apex:pageBlockSection>
+              <div align="center" draggable="false" >
+               <apex:commandButton value="Search" action="{!search}" rerender="searchRes"/>
+            </div>
+            <apex:outputPanel id="searchRes">
+            <apex:pageBlock id="blk">
+            <apex:outputPanel id="table">
+            <apex:pageblockTable value="{!studList}" var="stud" rendered="{!studList.size >0}">
+                <apex:column >
+                <apex:facet name="header">Student ID</apex:facet>
+
+                <apex:commandLink value="{!stud.Name}" action="{!navigateToStudentRecord}" target="_blank">
+                    <apex:param value="{!stud.Id}" assignTo="{!studId}" name="studId" />
+                </apex:commandLink>
+                </apex:column>
+                 <apex:column value="{!stud.First_Name__c}"/>
+                  <apex:column value="{!stud.Last_Name__c}"/>
+                  <apex:column value="{!stud.Semester__c}"/>
+                   <apex:column value="{!stud.Major__c}"/>
+                   <apex:column value="{!stud.Email__c}"/>
+                     <apex:column >
+                <apex:facet name="header">Send SMS</apex:facet>
+
+                <apex:commandLink value="Send SMS" action="{!showSMSPopup}" >
+                    <apex:param value="{!stud.Phone__c}" assignTo="{!studPhone}" name="studPhone" />
+                </apex:commandLink>
+                </apex:column>
+            </apex:pageblockTable>
+            </apex:outputPanel>
+            <apex:pageblockButtons >
+                <apex:commandButton value="First Page" rerender="blk" action="{!FirstPage}" disabled="{!prev}"/>
+                <apex:commandButton value="Previous" rerender="blk" action="{!previous}" disabled="{!prev}"/>
+                <apex:commandButton value="Next" rerender="blk" action="{!next}" disabled="{!nxt}"/>
+                <apex:commandButton value="Last Page" rerender="blk" action="{!LastPage}" disabled="{!nxt}"/>
+            </apex:pageblockButtons>
+            </apex:pageBlock>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        
+        <apex:outputPanel id="popup">
+
+                <apex:outputPanel id="popInnerOutputPnl" styleClass="customPopup"  rendered="{!showpopup}">
+                     <apex:commandButton value="X" title="Close the popup" action="{!closePopup}" styleClass="closeButton" rerender="popup">
+                     </apex:commandButton>
+                     <apex:pageBlock title="Enter the Body of the message:">
+                   <apex:inputTextArea value="{!textMessageBody}" label="Body" style="width:100%;"/>
+                      <apex:pageBlockButtons >
+            <apex:commandButton value="Send" action="{!sendSMS}" rerender="popup"   />
+        </apex:pageBlockButtons>
+       
+       
+   </apex:pageBlock>
+                   <!--  <apex:commandButton value="Ok" action="{!redirectPopup}" styleClass="closeButton" rerender="popup">
+                     </apex:commandButton>-->
+                </apex:outputPanel>
+                </apex:outputPanel>
+        
+    </apex:form>
+</apex:page>

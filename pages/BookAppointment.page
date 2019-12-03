@@ -1,0 +1,103 @@
+<apex:page controller="BookAppointmentController" docType="html-5.0">
+    <script>
+        function setSelectedSlot(selSlot,size){
+            for(i=0;i<size;i++){
+                document.getElementById(i).style.color = "black";
+            }
+            
+
+           
+            selectedSlot(selSlot);
+        }
+        function highlightSelected(selSlot){
+            document.getElementById(selSlot).style.color = "blue";
+        }
+    </script>
+        <style type="text/css">
+            .customPopup {
+                background-color: white;
+                border-style: solid;
+                border-width: 2px;
+                left: 20%;
+                padding: 10px;
+                position: absolute;
+                z-index: 9999;
+                /* These are the 3 css properties you will need to tweak so the pop 
+                                        up displays in the center of the screen. First set the width. Then set 
+                                        margin-left to negative half of what the width is. You can also add 
+                                        the height property for a fixed size pop up.*/
+                width: 500px;
+                top: 20%;
+            }
+            
+            .disabledTextBox {
+                background-color: white;
+                border: 1px solid;
+                color: black;
+                cursor: default;
+                width: 90px;
+                display: table;
+                padding: 2px 1px;
+                text-align:right;
+            }   
+            
+            .closeButton {
+                float: right;
+            }
+            </style>
+    <apex:form id="frm">
+            <apex:actionFunction action="{!selectedSlot}" name="selectedSlot"  rerender="frm" oncomplete="highlightSelected({!selSlot});" >
+                    <apex:param id="param" name="selSlot" value="" assignTo="{!selSlot}"/>
+                    </apex:actionFunction>
+    <apex:pageBlock title="Book an Appointment" >
+        <apex:pageBlockSection title="Search for Professor by Name" columns="1">
+           <apex:inputText label="Professor Name" value="{!searchText}" id="srchTxt"></apex:inputText>
+            <apex:commandButton value="Search" action="{!searchForProfessor}" />
+            <apex:outputText id="txt" value="No Teaches Found!" rendered="{!teacherList.size==0 && showMsg == true}"/>
+         
+            <apex:dataTable width="100%" value="{!teacherList}" var="tch" id="table1" rendered="{!teacherList.size > 0 }" cellPadding="4" border="1"> 
+                    <apex:column >
+                            <apex:facet name="header" > Professor Name</apex:facet>
+                            <apex:commandLink value="{!tch.Name}" action="{!bookAnAppointment}" reRender="popup" >
+                                <apex:param name="tchrId" value="{!tch.Id}" assignTo="{!tchrId}"/>
+                            </apex:commandLink>
+                        </apex:column>
+            </apex:dataTable>
+        </apex:pageBlockSection>
+        <apex:outputPanel id="popup">
+                <apex:outputPanel id="popInnerOutputPnl" styleClass="customPopup"  rendered="{!showpopup}">
+                    <apex:commandButton value="X" title="Close the popup" action="{!closePopup}" styleClass="closeButton" rerender="popup">
+                    </apex:commandButton>
+                    <apex:pageBlock >
+                    <h1 style="width:107%;">Book an Appointment with {!selectedTeacher.Name}</h1>
+                    <apex:pageBlockSection columns="1">
+                       <b>Appointment Date: </b> <apex:input type="date" value="{!appDate}"/> {!selectedTeacher.Name} is only available on {!daysAvailable}
+                        <br/>
+                        <apex:commandLink value="View available slots" action="{!showAvailableSlots}" rerender="slots"/>
+                       <apex:outputPanel id="slots">
+                           <ul>
+                                <apex:variable var="i" value="{!0}"/>
+                                <apex:outputText value="Please click on any one slot to select. Each slot is for 15mins." rendered="{!msg == NULL && slotSize>0}"/>
+                          <apex:repeat var="slot" value="{!slotSet}" rendered="{!appDate!=NULL && showSlots == true}">
+                          <li value="{!slot}" id="{!i}"  onclick="setSelectedSlot({!i},{!slotSize});">{!slot}</li><br/>
+                          <apex:variable var="i" value="{!i+1}"/>
+                          <!--<apex:commandLink value="{!slot}"/> <br/> -->
+                         <!--  <apex:outputText value="{!slot}"></apex:outputText><br/>-->
+                           </apex:repeat>
+                        </ul>
+                           <apex:outputText value="{!msg}" rendered="{!msg != NULL}"/>
+
+
+                           
+                                           
+                       </apex:outputPanel>
+                      
+                        <apex:commandButton value="Save" action="{!saveAppointment}" rerender="popup"   />
+                       
+                    </apex:pageBlockSection>   
+                    </apex:pageBlock>
+                </apex:outputPanel>
+            </apex:outputPanel>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

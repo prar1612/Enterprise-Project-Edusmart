@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Paypal_Password</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Paypal Password</shortDescription>
+        <value>USNC62PHR6HZBYUG</value>
+    </labels>
+    <labels>
+        <fullName>Paypal_URL</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Paypal URL</shortDescription>
+        <value>https://api-3t.sandbox.paypal.com/2.0/</value>
+    </labels>
+    <labels>
+        <fullName>Paypal_UserName</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Paypal UserName</shortDescription>
+        <value>sb-lvnrd497518_api1.business.example.com</value>
+    </labels>
+    <labels>
+        <fullName>Paypal_signature</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Paypal signature</shortDescription>
+        <value>AxuJg3SvqhecqsoBYe3sJqW7LIr9Ax7oaV7f31tMjyfP1bKO5CoJEqBL</value>
+    </labels>
+    <labels>
+        <fullName>Survey_Link</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Survey Link</shortDescription>
+        <value>https://www.surveymonkey.com/r/3HDXP7L</value>
+    </labels>
+    <labels>
+        <fullName>Twilio_Account_ID</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Twilio Account ID</shortDescription>
+        <value>AC25fd1786e17da1cb8001450965133d2d</value>
+    </labels>
+    <labels>
+        <fullName>Twilio_Token</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Twilio Token</shortDescription>
+        <value>da394559b14f7e4cdd0a56768354af35</value>
+    </labels>
+    <labels>
+        <fullName>Twitter_Access_Key</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Twitter Access Key</shortDescription>
+        <value>1176568093276958720-ATICop2nP11K26TnLi9ZGoAbfSHOB6</value>
+    </labels>
+    <labels>
+        <fullName>Twitter_Access_Secret</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Twitter Access Secret</shortDescription>
+        <value>AKnTnJAEKkpJnmV07u4WTTRqRqoXG4IBOHO6yuIdYKovQ</value>
+    </labels>
+    <labels>
+        <fullName>Twitter_Consumer_Key</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Twitter Consumer Key</shortDescription>
+        <value>roH4kkhDphguy9CazvYLd3Yyo</value>
+    </labels>
+    <labels>
+        <fullName>Twitter_Consumer_Secret</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Twitter Consumer Secret</shortDescription>
+        <value>K2GQXEQAhCSUbdbVDIr0nCeRR830wyVKAK5DK6awMqAgWiWvn2</value>
+    </labels>
+</CustomLabels>

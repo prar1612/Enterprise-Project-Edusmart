@@ -1,0 +1,78 @@
+<apex:page controller="TeacherDashboardController">
+<script>
+function appCancelJS(appId){
+//alert(appId);
+    appCncl(appId);
+   // appsendSMS();
+}
+function abc(){
+    alert('hi');
+    appsendSMS();
+}
+</script>
+<apex:form id="frm">
+  <apex:actionFunction action="{!cancelAppointment}" name="appCncl" oncomplete="abc();" reRender="appList,noApps"> 
+    <apex:param name="firstParam" assignTo="{!appId}" value="" />
+    </apex:actionFunction>
+    
+  <apex:actionFunction action="{!sendSMS}" name="appsendSMS" status="Status2"    />
+<apex:pageBlock title="My Dashboard">
+<apex:pageBlockSection title="Personal Details">
+<apex:outputText title="Name"   value="{!tchr.Name}"></apex:outputText>
+<apex:outputText title="Phone"   value="{!tchr.Phone__c}"></apex:outputText>
+<apex:outputText title="Email"   value="{!tchr.Email__c}"></apex:outputText>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Courses" columns="1">
+   <apex:dataTable width="100%" value="{!courseList}" var="cr" id="table1" rendered="{! (courseList.size > 0) }" cellPadding="4" border="1">
+   <apex:column >
+   <apex:facet name="header">Course ID</apex:facet>
+   <apex:commandLink value="{!cr.name}" action="{!viewCourseDetails}"  target="_blank">
+  <apex:param name="crsId"
+                value="{!cr.Id}"
+                assignTo="{!crsId}"/></apex:commandLink>
+  </apex:column>
+ <apex:column >
+ <apex:facet name="header">Course Name</apex:facet>{!cr.Course_Name__c}</apex:column>
+ <apex:column ><apex:facet name="header">Major</apex:facet> {!cr.Major__c}</apex:column>
+ <apex:column ><apex:facet name="header">Semester</apex:facet> {!cr.Semester__c}</apex:column>
+ <apex:column ><apex:facet name="header">Timings</apex:facet> {!cr.Days_of_the_week__c} {!cr.Timings__c}</apex:column>
+ <apex:column ><apex:facet name="header">Venue</apex:facet> {!cr.Venue__c}</apex:column>
+</apex:dataTable>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Upcoming Appointments" columns="1">
+   <apex:outputPanel id="noApps">
+        <apex:outputText id="txt2" rendered="{! (appList.size = 0) }" value="No upcoming Appointments!"></apex:outputText>
+    </apex:outputPanel>
+    <apex:outputPanel id="appList">
+        <apex:dataTable value="{!appList}"  width="100%" cellPadding="4" border="1" var="app" id="table2" rendered="{! (appList.size > 0) }">
+            <apex:column >
+                  <apex:facet name="header">Appointment #</apex:facet>
+                  <apex:outputText value="{!app.Name}"></apex:outputText>
+                  </apex:column>
+                  <apex:column >
+                  <apex:facet name="header">Student Name</apex:facet>
+                  <apex:outputText value="{!app.Student__r.First_Name__c} {!app.student__r.Last_Name__c}"></apex:outputText>
+                  </apex:column>
+                  <apex:column >
+                          <apex:facet name="header">Date</apex:facet>
+                          <apex:outputText value="{!app.Date__c}"></apex:outputText>
+                          </apex:column>
+                          <apex:column >
+                          <apex:facet name="header">Appointment Slot</apex:facet>
+                          <apex:outputText value="{!app.Start_Time__c} - {!app.End_Time__c}"></apex:outputText>
+                          </apex:column>
+                          <apex:column >
+                                  <apex:facet name="header">Cancel Appointment</apex:facet>
+                                  <apex:commandLink value="Cancel" action="{!cancelAppointment}" reRender="appList,noApps">
+                                       <apex:param name="appId"
+                                                        value="{!app.Id}"
+                                                        assignTo="{!appId}"/></apex:commandLink>
+                                  </apex:column>
+
+         </apex:dataTable>
+         </apex:outputPanel>
+</apex:pageBlockSection>
+
+</apex:pageBlock>
+</apex:form>
+</apex:page>

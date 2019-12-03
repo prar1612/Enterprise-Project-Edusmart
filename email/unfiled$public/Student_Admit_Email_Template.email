@@ -1,0 +1,6 @@
+Hi {!Student__c.First_Name__c},
+
+Congratulations! You have secured an admit for {!Student__c.Major__c} at our university.
+You will shortly receive an email with login credentials to the EduSmart Portal.
+
+Thank you!

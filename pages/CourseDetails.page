@@ -1,0 +1,38 @@
+<apex:page controller="CourseDetailsController">
+<apex:form >
+<apex:pageBlock title="Course Information">
+<apex:pageBlockSection title="Course Details" columns="2">
+<apex:outputText value="Course Code: {!course.Name}"></apex:outputText>
+<apex:outputText value="Course Name: {!course.Course_Name__c}"></apex:outputText>
+<apex:outputText value="Timings: {!course.Days_of_the_week__c} {!course.Timings__c} "> </apex:outputText> 
+<apex:outputText value="Venue: {!course.Venue__c} "> </apex:outputText> 
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Professor Details" columns="3">
+<apex:outputText value="Name: {!course.Teacher__r.Name}"> </apex:outputText>
+<apex:outputText value="Phone: {!course.Teacher__r.Phone__c}"> </apex:outputText>
+<apex:outputText value="Email: {!course.Teacher__r.Email__c}"> </apex:outputText>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Assignments" columns="1">
+
+ <apex:dataTable width="100%" value="{!asnList}" var="as" id="table1" rendered="{! (asnList.size > 0) }" cellPadding="4" border="1">
+   <apex:column >
+   <apex:facet name="header">Assignment Name</apex:facet>
+   <apex:commandLink value="{!as.name}" action="{!viewAssignmentDetails}"  target="_blank">
+  <apex:param name="asnId"
+                value="{!as.Id}"
+                assignTo="{!asnId}"/></apex:commandLink>
+  </apex:column>
+ <apex:column >
+ <apex:facet name="header">Total Points</apex:facet>
+ <apex:outputText value="{!as.Total_Points__c}"></apex:outputText>
+ </apex:column>
+ <apex:column >
+ <apex:facet name="header">Due Date</apex:facet>
+ <apex:outputText value="{!as.Due_Date__c}"></apex:outputText>
+ </apex:column>
+</apex:dataTable>
+
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

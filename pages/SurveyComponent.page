@@ -1,0 +1,18 @@
+<apex:page controller="SurveyComponentController" sidebar="false" showHeader="false">
+<apex:form >
+   
+    <apex:pageBlock >
+    <apex:outputPanel id="msgs">
+           <apex:outputText value="{!message}"></apex:outputText>
+           <apex:outputPanel rendered="{!isRetrieve}"><apex:commandLink value="Report Link!" action="{!showReport}" target="_blank"/>
+           </apex:outputPanel>
+           </apex:outputPanel><br/>
+           <br/>
+           <apex:pageBlockSection title="End Of Semester Survey">
+        <apex:commandButton value="Send Survey Email to all students" action="{!SendEmail}" rerender="msgs"/><br/><br/>
+          <apex:commandButton value="Clear Previous survey results" action="{!clearSurveyResults}" rerender="msgs"/><br/><br/>
+           <apex:commandButton value="Retrieve Survey results" action="{!retrieveSurveyResults}" rerender="msgs"/>
+         </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

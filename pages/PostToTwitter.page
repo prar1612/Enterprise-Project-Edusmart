@@ -1,0 +1,15 @@
+<apex:page sidebar="false" showHeader="false" controller="PostToTwitterController">
+    <apex:form id="FormId">
+        <apex:pageBlock >
+        <apex:pageBlockSection columns="1" collapsible="false" title="Post to Twitter" id="pbs">
+     
+            <apex:inputTextarea value="{!status}" rows="4" style="width:90%"/>
+            <br/>
+            <apex:commandButton action="{!postTweettoTimeline}" value="Post Event" rerender="resultSection,pbs"/>
+        </apex:pageBlockSection>
+        </apex:pageBlock>    
+        <apex:outputPanel id="resultSection">
+            <apex:outputText value="New tweet - {!twitterStatus} has been sucessfully posted!" rendered="{!success}"/>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,33 @@
+<apex:page controller="FeePaymentController">
+   <apex:form >
+        <apex:pageMessages id="msgId"/>
+       <apex:pageBlock title="Fee Payment" >
+         
+           <apex:pageBlockSection title="Personal details" columns="2"  >
+               <apex:inputText value="{!stud.First_Name__c}" label="First Name" disabled="true"/>
+               <apex:inputText value="{!stud.last_name__c  }" label="Last Name" disabled="true"/>
+               <apex:inputText value="{!p.payer}" label="Email ID"/>
+               <apex:inputText value="{!p.Addy1 }" label="Address Line 1"/>
+               <apex:inputText value="{!p.Addy2}" label="Address Line 2"/>
+               <apex:inputText value="{!p.city }" label="City"/>
+               <apex:inputText value="{!p.state }" label="State"/>
+               <apex:inputText value="{!p.zip }" label="Zip"/>
+               <apex:inputText value="{!p.Country }" label="Country"/>
+           </apex:pageBlockSection>
+           <apex:pageBlockSection title="Card details" columns="2" >
+               <apex:inputText label="Amount" value="{!amount}" disabled="true"/>
+               <apex:inputText value="{!p.CardType  }" label="Card Type"/>
+               <apex:inputText value="{!p.CardNo  }" label="Card Number"/>
+               <apex:inputText value="{!p.CVV  }" label="CVV"/>
+               <apex:inputText value="{!p.expMo  }" label="Expiry Month"/>
+               <apex:inputText value="{!p.expYe  }" label="Expiry Year"/>
+
+               </apex:pageBlockSection>
+              
+               <div align="center" draggable="false" >
+               <apex:commandButton value="Pay" action="{!MakePayment}" rerender="msgId"/>
+            </div>
+      
+       </apex:pageBlock>
+   </apex:form>
+</apex:page>

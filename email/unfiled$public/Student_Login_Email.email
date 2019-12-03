@@ -1,0 +1,10 @@
+Hi {!Student__c.First_Name__c},
+
+Below are the login credentials for the EduSmart Portal:
+URL: https://teamsaas-edusmart-dev-ed.my.salesforce.com/
+UserName: {!Student__c.First_Name__c}.{!Student__c.Last_Name__c}@edusmart.com
+
+You would have received a separate email to reset your password to login to the EduSmart Salesforce Portal.
+
+Thanks,
+Edusmart Admin

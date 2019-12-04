@@ -5,7 +5,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Paypal Password</shortDescription>
-        <value>USNC62PHR6HZBYUG</value>
+        <value>***********</value>
     </labels>
     <labels>
         <fullName>Paypal_URL</fullName>
@@ -54,27 +54,27 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Twitter Access Key</shortDescription>
-        <value>1176568093276958720-ATICop2nP11K26TnLi9ZGoAbfSHOB6</value>
+        <value>********************</value>
     </labels>
     <labels>
         <fullName>Twitter_Access_Secret</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Twitter Access Secret</shortDescription>
-        <value>AKnTnJAEKkpJnmV07u4WTTRqRqoXG4IBOHO6yuIdYKovQ</value>
+        <value>************</value>
     </labels>
     <labels>
         <fullName>Twitter_Consumer_Key</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Twitter Consumer Key</shortDescription>
-        <value>roH4kkhDphguy9CazvYLd3Yyo</value>
+        <value>***********</value>
     </labels>
     <labels>
         <fullName>Twitter_Consumer_Secret</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Twitter Consumer Secret</shortDescription>
-        <value>K2GQXEQAhCSUbdbVDIr0nCeRR830wyVKAK5DK6awMqAgWiWvn2</value>
+        <value>******************</value>
     </labels>
 </CustomLabels>
